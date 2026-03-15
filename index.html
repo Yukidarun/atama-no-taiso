@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>頭の体操、むっちゃ足し算</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="titleScreen" class="screen active title-screen">
+      <div class="title-bg">
+        <div class="title-bg-problem">15 + 10</div>
+        <div class="title-bg-calc">
+          <span>7</span><span>8</span><span>9</span><span>C</span>
+          <span>4</span><span>5</span><span>6</span><span>確定</span>
+          <span>1</span><span>2</span><span>3</span><span>0</span>
+        </div>
+        <div class="title-bg-enemy-wrap">
+          <img id="titleEnemyImage" class="title-enemy-image hidden" src="assets/images/enemy.png" alt="敵キャラ" />
+          <div id="titleEnemyFallback" class="title-enemy-fallback">ಠ_ಠ</div>
+        </div>
+      </div>
+
+      <div class="title-overlay panel">
+        <p class="eyebrow">BROWSER GAME</p>
+        <h1>頭の体操、むっちゃ足し算</h1>
+        <div class="rules-block">
+          <p>・2桁 + 2桁の足し算</p>
+          <p>・20秒以内に求めよ</p>
+          <p>・禁断の一撃？</p>
+        </div>
+        <button id="startBtn" class="primary-btn">ゲームスタート</button>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen">
+      <div id="warningBanner" class="warning-banner hidden"></div>
+
+      <header class="hud panel">
+        <div class="hud-item">残り時間 <strong id="timer">20.0</strong></div>
+        <div class="hud-item hud-hp">敵HP <strong><span id="enemyHp">0</span> / <span id="enemyHpMax">0</span></strong><div class="hp-bar"><div id="hpFill" class="hp-fill"></div></div></div>
+        <div class="hud-item">正解数 <strong id="correctCount">0</strong></div>
+      </header>
+
+      <main class="battle-layout vertical-split">
+        <section class="battlefield panel" id="battlefield">
+          <div id="rageOverlay" class="rage-overlay hidden"></div>
+          <div id="messageFloat" class="message-float hidden"></div>
+          <div id="damageFloat" class="damage-float hidden"></div>
+
+          <div class="problem-box compact-problem-box">
+            <span class="label">問題</span>
+            <div class="problem-row">
+              <div id="problemText" class="problem-text">00 + 00</div>
+              <div id="answerDisplay" class="answer-display inline-answer">0</div>
+            </div>
+          </div>
+
+          <div id="enemyStage" class="enemy-stage state-back">
+            <div id="enemyAura" class="enemy-aura"></div>
+            <div id="enemy" class="enemy">
+              <img id="enemyImage" class="enemy-image hidden" src="assets/images/enemy.png" alt="敵キャラ" />
+              <div id="enemyFallback" class="enemy-fallback">ಠ_ಠ</div>
+              <div id="enemySpeech" class="enemy-speech">...</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="calculator panel">
+          <div id="calculatorPad" class="calc-grid glow-on">
+            <button class="calc-btn" data-digit="7">7</button>
+            <button class="calc-btn" data-digit="8">8</button>
+            <button class="calc-btn" data-digit="9">9</button>
+            <button class="calc-btn utility" id="clearBtn">C</button>
+
+            <button class="calc-btn" data-digit="4">4</button>
+            <button class="calc-btn" data-digit="5">5</button>
+            <button class="calc-btn" data-digit="6">6</button>
+            <button class="calc-btn ok-btn" id="submitBtn">確定</button>
+
+            <button class="calc-btn" data-digit="1">1</button>
+            <button class="calc-btn" data-digit="2">2</button>
+            <button class="calc-btn" data-digit="3">3</button>
+            <div class="calc-spacer" aria-hidden="true"></div>
+
+            <button class="calc-btn zero" data-digit="0">0</button>
+          </div>
+        </section>
+      </main>
+    </section>
+
+    <section id="resultScreen" class="screen result-screen">
+      <div class="panel result-panel simple-result">
+        <p id="resultTag" class="eyebrow">RESULT</p>
+        <h2 id="resultTitle">ゲーム結果</h2>
+        <p id="resultComment" class="result-comment"></p>
+        <p class="result-title-line">称号：<span id="resultHonor">-</span></p>
+        
+        <div class="actions">
+          <button id="retryBtn" class="primary-btn">もう一度遊ぶ</button>
+          <button id="backTitleBtn" class="secondary-btn">タイトルへ戻る</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="flash" class="flash"></div>
+    <div id="freezeOverlay" class="freeze-overlay hidden"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
