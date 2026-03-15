@@ -643,3 +643,7 @@ h1, h2, h3, p { margin-top: 0; }
   0%, 100% { opacity: .72; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.02); }
 }
+
+button {
+  touch-action: manipulation;
+}
