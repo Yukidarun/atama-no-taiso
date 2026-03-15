@@ -2,8 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <title>頭の体操、むっちゃ足し算</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -38,19 +37,13 @@
     <section id="gameScreen" class="screen">
       <div id="warningBanner" class="warning-banner hidden"></div>
 
-      <header class="hud panel">
-        <div class="hud-item">残り時間 <strong id="timer">20.0</strong></div>
-        <div class="hud-item hud-hp">敵HP <strong><span id="enemyHp">0</span> / <span id="enemyHpMax">0</span></strong><div class="hp-bar"><div id="hpFill" class="hp-fill"></div></div></div>
-        <div class="hud-item">正解数 <strong id="correctCount">0</strong></div>
-      </header>
-
-      <main class="battle-layout vertical-split" id="battleLayout">
+      <main class="game-mobile-wrap">
         <section class="battlefield panel" id="battlefield">
           <div id="rageOverlay" class="rage-overlay hidden"></div>
           <div id="messageFloat" class="message-float hidden"></div>
           <div id="damageFloat" class="damage-float hidden"></div>
 
-          <div class="problem-box compact-problem-box">
+          <div class="battle-top compact-problem-box">
             <span class="label">問題</span>
             <div class="problem-row">
               <div id="problemText" class="problem-text">00 + 00</div>
@@ -58,13 +51,33 @@
             </div>
           </div>
 
-          <div id="enemyStage" class="enemy-stage state-back">
-            <div id="enemyAura" class="enemy-aura"></div>
-            <div id="enemy" class="enemy">
-              <img id="enemyImage" class="enemy-image hidden" src="assets/images/enemy.png" alt="敵キャラ" />
-              <div id="enemyFallback" class="enemy-fallback">ಠ_ಠ</div>
-              <div id="enemySpeech" class="enemy-speech">...</div>
+          <div class="battle-main">
+            <div class="enemy-wrap">
+              <div id="enemyStage" class="enemy-stage state-back">
+                <div id="enemyAura" class="enemy-aura"></div>
+                <div id="enemy" class="enemy">
+                  <img id="enemyImage" class="enemy-image hidden" src="assets/images/enemy.png" alt="敵キャラ" />
+                  <div id="enemyFallback" class="enemy-fallback">ಠ_ಠ</div>
+                  <div id="enemySpeech" class="enemy-speech">...</div>
+                </div>
+              </div>
             </div>
+
+            <aside class="side-status panel-lite">
+              <div class="status-card">
+                <span class="status-label">残り時間</span>
+                <strong id="timer">20.0</strong>
+              </div>
+              <div class="status-card status-hp-card">
+                <span class="status-label">敵HP</span>
+                <strong><span id="enemyHp">0</span> / <span id="enemyHpMax">0</span></strong>
+                <div class="hp-bar"><div id="hpFill" class="hp-fill"></div></div>
+              </div>
+              <div class="status-card">
+                <span class="status-label">正解数</span>
+                <strong id="correctCount">0</strong>
+              </div>
+            </aside>
           </div>
         </section>
 
@@ -83,9 +96,7 @@
             <button class="calc-btn" data-digit="1">1</button>
             <button class="calc-btn" data-digit="2">2</button>
             <button class="calc-btn" data-digit="3">3</button>
-            <div class="calc-spacer" aria-hidden="true"></div>
-
-            <button class="calc-btn zero" data-digit="0">0</button>
+            <button class="calc-btn" data-digit="0">0</button>
           </div>
         </section>
       </main>
@@ -97,7 +108,6 @@
         <h2 id="resultTitle">ゲーム結果</h2>
         <p id="resultComment" class="result-comment"></p>
         <p class="result-title-line">称号：<span id="resultHonor">-</span></p>
-        
         <div class="actions">
           <button id="retryBtn" class="primary-btn">もう一度遊ぶ</button>
           <button id="backTitleBtn" class="secondary-btn">タイトルへ戻る</button>

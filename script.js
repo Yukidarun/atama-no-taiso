@@ -97,7 +97,6 @@ function keepGameVisibleOnMobile() {
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   };
 
-  window.addEventListener('resize', sync);
   window.addEventListener('orientationchange', sync);
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) sync();
@@ -718,8 +717,8 @@ function startGame() {
 
   const isMaxEnemy = state.enemyHpMax === 1000;
   const isHundredEnemy = state.enemyHpMax === 100;
-  el.warningBanner.classList.toggle('hidden', !(isMaxEnemy || isHundredEnemy));
-  el.warningBanner.textContent = isMaxEnemy ? 'MAXIMUM ANGER' : (isHundredEnemy ? 'GOLDEN TRICKSTER' : '');
+  el.warningBanner.classList.add('hidden');
+  el.warningBanner.textContent = '';
   document.body.classList.toggle('global-rage', false);
   document.body.classList.toggle('global-max-rage', isMaxEnemy);
   document.body.classList.toggle('global-hundred-mode', isHundredEnemy);
