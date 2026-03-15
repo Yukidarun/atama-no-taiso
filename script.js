@@ -66,6 +66,46 @@ const state = {
   currentHundredPos: '',
 };
 
+
+function preventDoubleTapZoom() {
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', (event) => {
+    const now = Date.now();
+    const isDoubleTap = now - lastTouchEnd < 320;
+    lastTouchEnd = now;
+
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const isGameTap = target.closest('#gameScreen, .calc-btn, .primary-btn, .secondary-btn');
+    if (isDoubleTap && isGameTap) {
+      event.preventDefault();
+    }
+  }, { passive: false });
+
+  document.addEventListener('gesturestart', (event) => {
+    if (event.target instanceof Element && event.target.closest('#gameScreen')) {
+      event.preventDefault();
+    }
+  }, { passive: false });
+}
+
+function keepGameVisibleOnMobile() {
+  const mq = window.matchMedia('(max-width: 900px)');
+  const sync = () => {
+    if (!mq.matches || !el.gameScreen.classList.contains('active')) return;
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  };
+
+  window.addEventListener('resize', sync);
+  window.addEventListener('orientationchange', sync);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) sync();
+  });
+
+  return sync;
+}
+
 function setupEnemyImages() {
   [
     [el.enemyImage, el.enemyFallback],
@@ -672,6 +712,9 @@ function startGame() {
   createProblem();
   updateEnemyStage();
   showScreen('game');
+  if (typeof syncMobileViewport === 'function') {
+    requestAnimationFrame(() => syncMobileViewport());
+  }
 
   const isMaxEnemy = state.enemyHpMax === 1000;
   const isHundredEnemy = state.enemyHpMax === 100;
@@ -711,4 +754,6 @@ el.clearBtn.addEventListener('click', handleClear);
 el.submitBtn.addEventListener('click', handleSubmit);
 
 setupEnemyImages();
+preventDoubleTapZoom();
+const syncMobileViewport = keepGameVisibleOnMobile();
 showScreen('title');

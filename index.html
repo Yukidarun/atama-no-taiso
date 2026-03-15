@@ -7,7 +7,7 @@
   <title>頭の体操、むっちゃ足し算</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="mobile-optimized">
   <div id="app">
     <section id="titleScreen" class="screen active title-screen">
       <div class="title-bg">
@@ -44,7 +44,7 @@
         <div class="hud-item">正解数 <strong id="correctCount">0</strong></div>
       </header>
 
-      <main class="battle-layout vertical-split">
+      <main class="battle-layout vertical-split" id="battleLayout">
         <section class="battlefield panel" id="battlefield">
           <div id="rageOverlay" class="rage-overlay hidden"></div>
           <div id="messageFloat" class="message-float hidden"></div>

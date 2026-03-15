@@ -644,6 +644,233 @@ h1, h2, h3, p { margin-top: 0; }
   50% { opacity: 1; transform: scale(1.02); }
 }
 
-button {
+
+html, body {
+  overscroll-behavior: none;
+}
+body, button, .calc-btn, .primary-btn, .secondary-btn {
+  -webkit-tap-highlight-color: transparent;
+}
+button, .calc-btn, .primary-btn, .secondary-btn, #calculatorPad, #gameScreen {
   touch-action: manipulation;
+}
+body.mobile-optimized {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: 100%;
+}
+#gameScreen.active {
+  min-height: 100dvh;
+}
+
+@media (max-width: 900px) {
+  html, body {
+    height: 100%;
+  }
+  body.mobile-optimized {
+    overflow-x: hidden;
+    background: #fff;
+  }
+  .screen {
+    min-height: 100dvh;
+    padding: 10px;
+  }
+  #gameScreen.active {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+    overflow: hidden;
+  }
+  .warning-banner {
+    margin-bottom: 8px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    letter-spacing: .12em;
+  }
+  .hud {
+    margin-bottom: 0;
+    padding: 10px 12px;
+    gap: 6px;
+    border-radius: 18px;
+  }
+  .hud-item {
+    font-size: 12px;
+    gap: 8px;
+  }
+  .hud-item strong {
+    font-size: 18px;
+  }
+  .hp-bar {
+    height: 10px;
+    min-width: 96px;
+  }
+  .battle-layout {
+    height: 100%;
+    min-height: 0;
+    gap: 10px;
+    grid-template-rows: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  }
+  .battlefield,
+  .calculator {
+    min-height: 0;
+    padding: 12px;
+    border-radius: 20px;
+  }
+  .battlefield {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .compact-problem-box {
+    left: 12px;
+    top: 12px;
+    right: 12px;
+    padding: 10px 12px;
+    border-radius: 16px;
+  }
+  .problem-row {
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .problem-text {
+    font-size: clamp(24px, 7vw, 34px);
+    line-height: 1.1;
+  }
+  .inline-answer {
+    min-width: 64px;
+    padding: 8px 10px;
+    font-size: 22px;
+  }
+  .enemy-stage {
+    inset: 0;
+    padding-top: 70px;
+    align-items: end;
+  }
+  .enemy {
+    width: min(250px, 72vw);
+  }
+  .enemy-image {
+    max-height: min(29vh, 240px);
+  }
+  .enemy-fallback {
+    width: min(220px, 60vw);
+  }
+  .enemy-speech {
+    top: 10px;
+    right: 4px;
+    max-width: 46vw;
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 14px;
+  }
+  .message-float {
+    top: 72px;
+    font-size: 12px;
+  }
+  .damage-float {
+    top: 150px;
+    font-size: 28px;
+  }
+  .calculator {
+    align-items: stretch;
+    justify-content: stretch;
+    position: sticky;
+    bottom: 0;
+  }
+  .calc-grid {
+    max-width: none;
+    height: 100%;
+    gap: 10px;
+    padding: 0;
+  }
+  .calc-btn,
+  .calc-spacer {
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
+    font-size: clamp(24px, 7vw, 32px);
+  }
+  .calc-btn.utility,
+  .calc-btn.ok-btn {
+    font-size: clamp(16px, 4vw, 20px);
+  }
+  .zero {
+    aspect-ratio: auto;
+    min-height: 58px;
+  }
+  .title-overlay {
+    margin-top: 2vh;
+    padding: 22px 18px;
+    border-radius: 20px;
+  }
+  .title-bg-problem {
+    top: 7%;
+  }
+  .title-bg-calc {
+    bottom: 5%;
+    grid-template-columns: repeat(4, minmax(48px, 62px));
+    gap: 8px;
+  }
+  .title-bg-calc span {
+    height: 52px;
+    border-radius: 14px;
+    font-size: 14px;
+  }
+  .title-bg-enemy-wrap {
+    width: min(220px, 60vw);
+    height: 33vh;
+    bottom: 19%;
+  }
+}
+
+@media (max-width: 480px) {
+  .screen {
+    padding: 8px;
+  }
+  .title-overlay h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  .rules-block {
+    margin: 16px 0 20px;
+    padding: 14px;
+  }
+  .hud {
+    padding: 8px 10px;
+  }
+  .hud-item {
+    font-size: 11px;
+  }
+  .hud-item strong {
+    font-size: 16px;
+  }
+  .battle-layout {
+    grid-template-rows: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+  .problem-text {
+    font-size: clamp(22px, 7.5vw, 30px);
+  }
+  .inline-answer {
+    font-size: 20px;
+    min-width: 58px;
+  }
+  .enemy {
+    width: min(220px, 70vw);
+  }
+  .enemy-image {
+    max-height: min(25vh, 200px);
+  }
+  .calc-grid {
+    gap: 8px;
+  }
+  .calc-btn,
+  .calc-spacer {
+    border-radius: 16px;
+    font-size: clamp(22px, 8vw, 28px);
+  }
+  .zero {
+    min-height: 54px;
+  }
 }
